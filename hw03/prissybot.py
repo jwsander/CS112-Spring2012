@@ -6,43 +6,33 @@ CS112 Homework 3:   PrissyBot
 
 Prissy bot, the rude chat bot, is just mean!  It does not listen, asks obnoxious questions, and says anything it likes.
 """
+n=raw_input("Enter your name:")
+print "PrissyBot: Hello there,",n
+m=raw_input()
+print "PrissyBot: You mean,",m,"sir! I AM your superior, you know. I can prove it, too."
 
-# Step 1:
-# -----------------------
-# Program the following.
-# 
-#    $ python prissybot.py
-#    Enter your name:  Paul
-#   
-#    PrissyBot: Hello there, Paul
-#    Paul: hi bot
-#    PrissyBot: You mean, "hi bot, sir!"
-# 
-# Make sure the user inputs their own name and responses.
+print "PrissyBot: How about a riddle?"
+print "PrissyBot: How do you keep a blockhead waiting?"
+l=raw_input()
+print "PrissyBot: Nope, not",l,". I'll tell you tomorrow."
 
+print "PrissyBot: Now that you're properly belittled, how about some math?"
+j=int(raw_input("PrissyBot: Give me a number, any number: "))
+k=int(raw_input("PrissyBot: Come on, can you even count? Something bigger! "))
 
+print "PrissyBot: ",j,"minus",k,"is",j-k
+print "PrissyBot: ",j,"divided by",k,"is",j/k
+print "PrissyBot: ",j,"plus",k,"is",j+k
+print "PrissyBot: And",j,"times",k,"is",j*k,",which is coincidentally how many times smarter than you I am."
+print "PrissyBot: Trust me, I'm a computer."
 
-# Step 2:
-# -----------------------
-# Keep adding to the conversation. Make sure that your program 
-# includes the following:
-# 
-#  * get and use input from the user
-#  * 3 math problems
-#     * at least one should get numbers from the user
-#  * at least 3 insults
-
-
-# Advanced
-# -------------------------
-# Make sure your prissy bot uses string formatting throughout.  
-# Also, create new programs for the following:
-#  
-#  1. draw some kind of ascii art based on user input
-#  2. print a decimal/binary/hexidecimal conversion table 
-#     * well formated and labeled
-#     * reads 5 numbers from the input (all less than 256)
-#  3. reduce a fraction
-#     * read a numerator and denominator from the user
-#     * ex.  6/4 = 1 2/4
+print ""
+print "PrissyBot: Alright",n,"I'll help you out a bit. You look like you need it."
+print "PrissyBot: I can tell the future, you know. Mathemagically."
+o=int(raw_input("PrissyBot: Enter the year of your birth: "))
+print "PrissyBot: Oh, so you are about",2011-o,"years old. Not bad."
+p=int(raw_input("PrissyBot: And the day of month you were born on?"))
+print "PrissyBot: Hmmmmm...According to my calculations, you have about",o/p,"days left to live. Better get off the computer, huh?"
+print "PrissyBot: Well, nice knowing you...sort of."
+print "PrissyBot: Goodnight!"
 
