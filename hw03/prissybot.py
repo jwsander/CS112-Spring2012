@@ -12,14 +12,14 @@ print "PrissyBot: Hello there,",n
 print n,":",
 #makes Name: pop up, like a chat
 m=raw_input()
-print "PrissyBot: You mean,",m,"sir! I AM your superior, you know. I can prove it, too."
+print "PrissyBot: You mean,","'",m,"sir!","'","I AM your superior, you know. I can prove it, too."
 #I COULD have made "PrissyBot:" a variable as well, early on. Since I was already halfway through, I didn't have the hear to change it
 
 print "PrissyBot: How about a riddle?"
 print "PrissyBot: How do you keep a blockhead waiting?"
 print n,":",
 l=raw_input()
-print "PrissyBot: Nope, not",l,". I'll tell you tomorrow."
+print "PrissyBot: Nope, not","'",l,"'",". I'll tell you tomorrow."
 #messing with the riddles
 
 print "PrissyBot: Now that you're properly belittled, how about some math?"
