@@ -5,23 +5,26 @@ print "Section 3:  Lists"
 print "-----------------------------"
 
 nums = input_nums()
-# 1. "nums" is a list of numbers entered from the command line.  How many
-#    numbers were entered?
+amount = len(nums)
 
-print "1.", __
+print "1.", amount, "numbers entered."
 
 # 2.  Append 3 and 5 to nums
-
+nums.append(3)
+nums.append(5)
 print "2.", nums
 
 # 3.  Remove the last element from nums
-
-print "3.", nums
+print "3.", nums[0:amount+1]
 
 
 # 4.  Set the 3rd element to 7
+nums2=nums[:]
+nums2[2]=7
+print "4.", nums2
 
-print "4.", nums
+
+
 
 
 # 5. [ADVANCED] Grab a new list of numbers and add it to the existing one
