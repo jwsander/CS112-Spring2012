@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 """tictactoe.py
 
-A Simple tic tac toe game
+A simple Tic-Tac-Toe game for two players. The Keypad is used.
+
+"Fill" means the area (corresponding to 1-9 on the keypad) is full with something, either an X or an O. X(1-9) and O(1-9) relate to the same thing. 
+
 """
 ##Initialization settings
 import pygame
