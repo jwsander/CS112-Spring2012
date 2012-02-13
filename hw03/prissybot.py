@@ -53,4 +53,3 @@ p=int(raw_input())
 print "PrissyBot: Hmmmmm...According to my calculations, you have about",o/p,"days left to live. Better get off the computer, huh?"
 print "PrissyBot: Well, nice knowing you...sort of."
 print "PrissyBot: Goodnight!"
-
