@@ -2,6 +2,6 @@
 
 will = "will is a..."
 
-print wi11
+print will
 
 will += "student"
