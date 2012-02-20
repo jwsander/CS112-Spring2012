@@ -13,12 +13,12 @@ nums = input_nums()
 print "Before sort:"
 print nums
 
-N = len(nums)
-for x in range(N):
+length = len(nums)
+for x in range(length):
     iPos = x
-    for i in range(x, N):
-        if nums[i] < nums[iPos]:
-            iPos = i
+    for num2 in range(x, length):
+        if nums[num2] < nums[iPos]:
+            iPos = num2
     nums[x],nums[iPos] = nums[iPos], nums[x]
 
 print "After sort:"
