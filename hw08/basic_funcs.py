@@ -62,9 +62,11 @@ def box(w,h):
         if len(listw) >= 1 and thin_box == False:
             print row
         
+#Applicablity to User Input
 #usr_w = int(raw_input("Width of box: "))
 #usr_h = int(raw_input("Height of box: "))
 
+#Tests
 box(1,1)
 box(1,2)
 box(1,3)
