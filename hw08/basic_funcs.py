@@ -8,8 +8,10 @@ def greeter(name):
     elif name == int(name):
         print "hello,", name
 
+#User Input (Optional):
 #name = raw_input("What's your name?")
 #greeter(name)
+
 
 
 # Draw a box
@@ -62,9 +64,10 @@ def box(w,h):
         if len(listw) >= 1 and thin_box == False:
             print row
         
-#Applicablity to User Input
-#usr_w = int(raw_input("Width of box: "))
-#usr_h = int(raw_input("Height of box: "))
+#User Input (Optional)
+#usr_w = raw_input("Width of box: ")
+#usr_h = raw_input("Height of box: ")
+#box(usr_w,usr_h)
 
 #Tests
 box(1,1)
