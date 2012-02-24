@@ -3,26 +3,19 @@
 import math
 
 # Distance formula
-#   calculate a function called "distance" to calculate the distance between two points.
-#   http://www.purplemath.com/modules/distform.htm
-#   ex: 
-#      >>> distance((0,0), (3,4))
-#      5
-
-# def distance(a, b):
 
 
-# ADVANCED
-# Normalizing Vectors
-#   normalize a vector of length N.  If given all zeros, just spit back the same vector
-#   http://www.fundza.com/vectors/normalize/index.html
+def distance((a,b), (c,d)):
+    dis = math.sqrt((a - c)**2 + (b - d)**2)
+    print int(dis)
+    return dis
 
-#   ex:
-#     >>> normalize((1,1))
-#     [0.70710678118654746, 0.70710678118654746]
-#     >>> normalize([0,0,0])
-#     [0,0,0]
-#     >>> normalize([1,1,1,1])
-#     [0.25, 0.25, 0.25, 0.25]
 
-# def normalize(vec):
+#Functionality
+
+#x1 = int(raw_input("X coordinate of 1st point: "))
+#y1 = int(raw_input("Y coordinates of 1st point: "))
+#x2 = int(raw_input("X coordinates of 2nd point: "))
+#y2 = int(raw_input("Y coordinates of 2nd point: "))
+
+
