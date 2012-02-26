@@ -11,7 +11,7 @@ def distance((a,b), (c,d)):
     return dis
 
 
-#Functionality
+#User Input
 
 #x1 = int(raw_input("X coordinate of 1st point: "))
 #y1 = int(raw_input("Y coordinates of 1st point: "))
