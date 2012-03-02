@@ -66,8 +66,10 @@ def avg_score(title):
         print "None"
     if title in movies:
         print movies[title]/float(len(values))
-
+        print len(values)
+    
 score("Fargo", 3)
+score("Fargo", 4)
 avg_score("Fargo")
 
 

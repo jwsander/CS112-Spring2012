@@ -23,7 +23,7 @@ Terms:
 
   Rectangle:  pygame.Rect
 """
-
+import pygame
 from pygame import Rect
 
 # 1. poly_in_rect
@@ -50,13 +50,21 @@ def poly_in_rect(poly, rect):
 #
 #      returns:  pygame.Rect
 
+RECT_SIZE = 120,300
+
 def surround_poly(poly):
     "create a rectangle which surounds a polygon"
     xlist = []
     ylist = []
     for (x,y) in poly:
-        xlist.append[x]
-        ylist.append[y]
+        xlist.append(x)
+        ylist.append(y)
     xlist = sorted(xlist)
     ylist = sorted(ylist)
-    pygame.rect((xlist[-1],ylist[-1]),(xlist[-1]-xlist[0], ylist[-1]-ylist[0])
+    rect1 = pygame.Rect((0,0), RECT_SIZE)
+    
+    rect1.topleft = (xlist[0],ylist[0])
+    rect1.width = xlist[-1] - xlist[0] +1
+    rect1.height = ylist[-1] - ylist[0] +1
+    return rect1
+    
