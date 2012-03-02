@@ -45,6 +45,7 @@ def freq(data):
 #      >>> avg_score("missing movie")
 #      None
 
+#Globals
 movies = {}
 values = []
 
@@ -67,7 +68,8 @@ def avg_score(title):
     if title in movies:
         print movies[title]/float(len(values))
         print len(values)
-    
+
+##Test (it works)    
 score("Fargo", 3)
 score("Fargo", 4)
 avg_score("Fargo")
