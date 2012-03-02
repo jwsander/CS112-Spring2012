@@ -42,8 +42,6 @@ def poly_in_rect(poly, rect):
            within = False
     return within
 
-rect = draw.rect(
-poly_in_rect([ (1,2), (4,8), (0,3)], rect)
 
 # 2. surround_poly
 #      Create a rectangle which contains the given polygon.  

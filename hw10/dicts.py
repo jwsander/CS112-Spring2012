@@ -27,7 +27,6 @@ def freq(data):
     return freqdict
 
 
-
 # 2. Movie Reviews
 #      Write two functions to help with scoring a movie.
 #
@@ -55,12 +54,11 @@ def score(title, value):
     if value < 0 or value > 5:
         print "Invalid score"
     else:
+        values.append(value)
         if title not in movies:
             movies[title] = value
-            values.append(value)
         elif title in movies:
             movies[title] += value
-            values.append(value)
 
 def avg_score(title):
     "return the average score for a given movie"
@@ -68,6 +66,9 @@ def avg_score(title):
         print "None"
     if title in movies:
         print movies[title]/float(len(values))
+
+score("Fargo", 3)
+avg_score("Fargo")
 
 
 # 3. parse_csv (Advanced)

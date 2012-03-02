@@ -35,8 +35,7 @@ def find_coins(room):
                coinlocs.append((l,k))
             l += 1
         k += 1
-
-    print coinlocs
+    return coinlocs
 
 room = [[0,0,1,0],
         [0,0,1,1],
@@ -56,9 +55,9 @@ import math
 def distance_from_player(player_x, player_y, width, height):
     "calculates the distance of each square from the player"
     grid = []
-    for i in range(width):
+    for i in range(height):
         row = []
-        for j in range(height):
+        for j in range(width):
             row.append(0)
         grid.append(row)
     grid[player_x][player_y] = 0
@@ -72,6 +71,7 @@ def distance_from_player(player_x, player_y, width, height):
             grid[k][l] = dist
             l += 1
         k += 1
+    return grid
     
             
 
