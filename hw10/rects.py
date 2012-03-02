@@ -61,10 +61,10 @@ def surround_poly(poly):
         ylist.append(y)
     xlist = sorted(xlist)
     ylist = sorted(ylist)
-    rect1 = pygame.Rect((0,0), RECT_SIZE)
-    
+
+    rect1 = pygame.Rect((0,0), RECT_SIZE)    
     rect1.topleft = (xlist[0],ylist[0])
-    rect1.width = xlist[-1] - xlist[0] +1
-    rect1.height = ylist[-1] - ylist[0] +1
+    rect1.width = xlist[-1] - xlist[0] + 1 #Needed the extra 1 to account for 0
+    rect1.height = ylist[-1] - ylist[0] + 1
     return rect1
     

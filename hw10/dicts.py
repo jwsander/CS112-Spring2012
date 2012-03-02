@@ -50,29 +50,27 @@ movies = {}
 values = []
 
 def score(title, value):
-    "register the score for a given movie out of 5"
-    value = float(value)
-    if value < 0 or value > 5:
-        print "Invalid score"
+    global values
+    if title in movies:
+        "register the score for a given movie out of 5"
+        values.append(float(value))
+        movies[title] = values
     else:
-        values.append(value)
-        if title not in movies:
-            movies[title] = value
-        elif title in movies:
-            movies[title] += value
+        values=[float(value)]
+        movies[title] = [float(value)]
 
 def avg_score(title):
     "return the average score for a given movie"
-    if title not in movies:
-        print "None"
+    scores=0
+    score=0
     if title in movies:
-        print movies[title]/float(len(values))
-        print len(values)
+        avg=0
+        for i in range(len(values)):
+            score=movies[title][i]
+            scores+=score
+        avg= scores/len(values)
+        return avg
 
-##Test (it works)    
-score("Fargo", 3)
-score("Fargo", 4)
-avg_score("Fargo")
 
 
 # 3. parse_csv (Advanced)
