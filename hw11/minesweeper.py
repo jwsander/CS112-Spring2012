@@ -56,7 +56,7 @@ bigfont = pygame.font.Font(None, 80)
 smallfont = pygame.font.Font(None, 40)
 bounds = screen.get_rect()
 rects = []
-clickedlft = []
+underrects = []
 clickedrt = []
 mines = []
 boompoints = []
@@ -67,12 +67,15 @@ for a in range(0,600,60):
     for b in range(0,600,60):
         sq = pygame.Rect((a,b),SQ_SIZE)
         rects.append(sq)
+        underrects.append(sq)
+
  #Mines
 mines = random.sample(rects,10)
 mines = sorted(mines)
 for mine in mines:
     pt = rectGrower(mine.topleft,mine.topright,mine.bottomleft,mine.bottomright)
     boompoints.extend(pt)
+
 
 ##Game Loop
 clock = pygame.time.Clock()
@@ -90,36 +93,26 @@ while not done:
         #Click on rect
         elif evt.type == MOUSEBUTTONDOWN and evt.button == 1:
             for rect in rects:
-                if rect.collidepoint(pygame.mouse.get_pos()) and end == False:
-                    clickedlft.append(rect)
-                    if rect in clickedrt:
-                        clickedrt.remove(rect)
+                if rect.collidepoint(pygame.mouse.get_pos()) and end == False and rect not in clickedrt:
+                    rects.remove(rect)
                     if rect in mines:
                         lose = True
-
 
         #Flagging
         elif evt.type == MOUSEBUTTONDOWN and evt.button == 3:
             for rect in rects:
-                if rect.collidepoint(pygame.mouse.get_pos()) and rect not in clickedlft and end == False:
+                if rect.collidepoint(pygame.mouse.get_pos()) and rect in rects  and end == False:
                     if rect not in clickedrt:
                         clickedrt.append(rect)
                     elif rect in clickedrt:
                         clickedrt.remove(rect)
 
     ##DRAW
-    screen.fill(GREY)
+    screen.fill(WHITE)
 
-    #Grid
-    for rect in rects:
-        if rect in clickedlft:
-            color = WHITE
-        elif rect in mines and end == True:
-            color = RED
-        else:
-            color = GREY
-        pygame.draw.rect(screen, color, rect)
-        pygame.draw.rect(screen, BLACK, rect, 1)
+    #Draw background Grid
+    for rect in underrects:
+        pygame.draw.rect(screen,BLACK,rect,1)
 
     #Flag
     for rect in clickedrt:
@@ -128,32 +121,46 @@ while not done:
 
     #Mine
     for rect in mines:
-        if rect in clickedlft:
+        if rect not in rects:
             drawMine(rect.center)
 
     #Numbers
-    for rect in clickedlft:
-        minesNear = 0
-        for boompoint in boompoints:
-            if rect.collidepoint(boompoint):
-                minesNear += 1
-        if minesNear > 0 and rect not in mines:
-            text = smallfont.render(str(minesNear), True, (0,0,0),WHITE)
-            loc = text.get_rect()
-            loc.center = rect.center
-            screen.blit(text,loc)
+    for rect in underrects:
+        if rect not in rects:
+            minesNear = 0
+            for boompoint in boompoints:
+                if rect.collidepoint(boompoint):
+                    minesNear += 1
+            if minesNear > 0 and rect not in mines:
+                text = smallfont.render(str(minesNear), True, (0,0,0),WHITE)
+                loc = text.get_rect()
+                loc.center = rect.center
+                screen.blit(text,loc)
 
     ##Clearing multiple spaces
-        elif minesNear == 0:
-            safe = rectGrower(rect.topleft,rect.topright,rect.bottomleft,rect.bottomright)
-            safes.extend(safe)
+            elif minesNear == 0:
+                safe = rectGrower(rect.topleft,rect.topright,rect.bottomleft,rect.bottomright)
+                safes.extend(safe)
     for rect in rects:
         for safe in safes:
-            if rect.collidepoint(safe) and rect not in clickedlft:
-                clickedlft.append(rect)
+            if rect.collidepoint(safe) and rect in rects:
+                rects.remove(rect)
                 safes = []
 
+    ##Draw Top Grid
+    for rect in rects:
+        if rect in mines and end == True:
+            color = RED
+        else:
+            color = GREY
+        pygame.draw.rect(screen, color, rect)
+        pygame.draw.rect(screen, BLACK, rect, 1)
     
+    ##Draw Flag
+    for rect in clickedrt:
+        drawFlag(rect.center)
+        clickedrt = sorted(clickedrt)
+
     if clickedrt == mines:
         win = True
     
