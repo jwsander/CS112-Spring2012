@@ -64,4 +64,6 @@ def draw_player(surf, color):
     dh = rect.height - d
 
     pygame.draw.rect(surf, color, (0, (rect.height - wall)/2, rect.width, wall))
+    
+    
 

@@ -75,7 +75,19 @@ class ShipGroup(Group):
 class Player(Ship):
     width = 40
     height = 40
-    
+    def __init__(self, x, y, vx, vy, bounds, color):
+        Sprite.__init__(self)
+
+        self.vx = vx
+        self.vy = vy
+        self.bounds = bounds
+        self.color = color
+
+        self.rect = Rect(x, y, self.width, self.height)
+        self.image = Surface(self.rect.size)
+        self.draw_image()
+        
+
     def draw_image(self):
         draw_player(self.image, self.color)
 
@@ -83,9 +95,21 @@ class Player(Ship):
         vx = 0
         vy = 0
 
-#        dt /= 1000.0
-#        dx = int(self.vx * dt)
-#        dy = int(self.vy * dt)
+    def move(self, dir):
+        if dir=="w":
+            self.rect.y -= self.vy
+        if dir=="s":
+            self.rect.y += self.vy
+        if dir=="a":
+            self.rect.x -= self.vx
+        if dir=="d":
+            self.rect.x += self.vx
+
+
+
+
+#        dx = int(self.vx)
+#        dy = int(self.vy)
 #        self.rect.x += dx
 #        self.rect.y += dy
 
@@ -93,9 +117,7 @@ class Player(Ship):
 #            self.vx = -self.vx
 #            self.rect.x += -2 * dx
 
-#        if self.rect.top < self.bounds.top:
-#            Sprite.kill(self)
-#        if self.rect.top > self.bounds.bottom:
+#        if self.rect.top < self.bounds.top or if self.rect.top > self.bounds.bottom:
 #            self.vy = -self.vy
 #            self.rect.y += -2 * dy
 
@@ -166,12 +188,12 @@ class Bullet(Ship):
 class BulletSpawner(ShipSpawner):
     ship_type = Bullet
 
- #   def __init__(self, duration, group, bounds,player):
- #       self.group = group
-  #      self.bounds = bounds
-   #     self.duration = duration
-    #    self.time = duration
-     #   self.player = player
+    def __init__(self, duration, group, bounds,player):
+        self.group = group
+        self.bounds = bounds
+        self.duration = duration
+        self.time = duration
+        self.player = player
         
     def rand_vel(self):
         vx = 0
@@ -183,8 +205,8 @@ class BulletSpawner(ShipSpawner):
         return r,r,r
 
     def spawn(self):
-#        x = self.player.rect.x
-        y = self.bounds.bottom
+        x = self.player.rect.x
+        y = self.player.rect.y
         vx, vy = self.rand_vel()
         color = self.rand_color()
 
@@ -278,10 +300,13 @@ class YWingSpawner(ShipSpawner):
 
 ## GAME
 class Game(Application):
-#    title = "Shoot ALL the Planes!"
+    title = "SMUP"
     screen_size = 800, 600
     min_dt = 200
     max_ships = 600
+
+    pygame.font.init()
+
 
     def __init__(self):
         Application.__init__(self)
@@ -290,7 +315,8 @@ class Game(Application):
         self.ships = ShipGroup(self.max_ships)
         self.bullets = ShipGroup(self.max_ships)
         self.xplos = ExplosionGroup()
- #       self.player = Player(200, 200, 0, 0, self.bounds, (0,0,0))
+ #       self.score = 0
+        self.player = Player(400, 560, 20, 20, self.bounds, (255,255,255))
         Explosion.group = self.xplos
 
         self.spawners = [ TieSpawner(1000, self.ships, self.bounds),
@@ -299,21 +325,22 @@ class Game(Application):
         
 
     def handle_event(self, event):
+
         if event.type == MOUSEBUTTONDOWN and event.button == 1:
             self.xplos.add( Explosion(pygame.mouse.get_pos(), 30) )
 
         elif event.type == KEYDOWN and event.key == K_f:
             dt = min(self.min_dt, self.clock.get_time())
-#            BulletSpawner(500, self.bullets, self.bounds,self.player).update(dt)
-                                                        #^^^^^^^^^^^
+            BulletSpawner(500, self.bullets, self.bounds,self.player).update(dt)
+
         elif event.type == KEYDOWN and event.key == K_w:
-            pass
+            self.player.move("w")
         elif event.type == KEYDOWN and event.key == K_s:
-            pass 
+            self.player.move("s")
         elif event.type == KEYDOWN and event.key == K_a:
-            pass
+            self.player.move("a")
         elif event.type == KEYDOWN and event.key == K_d:
-            pass
+            self.player.move("d")
 
     def update(self):
         dt = min(self.min_dt, self.clock.get_time())
@@ -321,7 +348,6 @@ class Game(Application):
         self.ships.update(dt)
         self.xplos.update(dt)
         self.bullets.update(dt)
-
 
         for xplo in self.xplos:
             pygame.sprite.spritecollide(xplo, self.ships, True, collide_xplo_ship)
@@ -331,16 +357,26 @@ class Game(Application):
                 if pygame.sprite.collide_rect(bullet, ship):
                     ship.kill()
                     Sprite.kill(bullet)
+ #                   self.score +=1
 
 
         for spawner in self.spawners:
             spawner.update(dt)
 
     def draw(self, screen):
-        screen.fill((0,0,0))
+#        smallfont = pygame.font.Font(None,80)
+#        screen.fill((0,0,0))
+#        text = smallfont.render(str(self.score), True,(255,255,255), (0,0,0))
+#        loc = text.get_rect()
+#        loc.center = self.bounds.center
+#        screen.blit(text,loc)
+
         self.ships.draw(screen)
         self.xplos.draw(screen)
         self.bullets.draw(screen)
+        self.player.draw_image()
+        pygame.draw.circle(screen, self.player.color,(self.player.rect.x,self.player.rect.y),10)
+        
 
 if __name__ == "__main__":
     Game().run()
