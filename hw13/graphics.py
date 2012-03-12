@@ -23,25 +23,22 @@ def draw_tie(surf, color):
 
     dw = rect.width - d
     dh = rect.height - d
-
-    pygame.draw.rect(surf, color, (0, 0, wall, rect.height))
-    pygame.draw.rect(surf, color, (rect.right-wall, 0, wall, rect.height))
-    pygame.draw.rect(surf, color, (0, (rect.height - wall)/2, rect.width, wall))
-    pygame.draw.circle(surf, color, ( (d+dw)/2, (d+dh)/2 ), d / 4)
+    
+    pygame.draw.circle(surf, (255,255,255), ( (d+dw)/2, (d+dh)/2 ), d/2)
+    pygame.draw.circle(surf,(0,0,0), ((d+dw)/2, (d+dh)/2 + 3), d/5)
+    pygame.draw.circle(surf,color, ((d+dw)/2, (d+dh)/2 + 3), d/4, 4)
     
 
 def draw_ywing(surf, color):
     clear(surf, color)
     rect = surf.get_rect()
-
-    unit = rect.height / 16
-    engine_len = rect.width / 2 + 3 * unit
     
-    pygame.draw.rect(surf, color, (0, 0, engine_len + unit, 3 * unit))
-    pygame.draw.rect(surf, color, (0, rect.height - 3*unit, engine_len + unit, 3 * unit))
-    pygame.draw.rect(surf, color, (rect.width-engine_len, (rect.height - 3*unit) / 2, engine_len, 3 * unit))
-    pygame.draw.rect(surf, color, ( (rect.width - 3*unit)/2, 0, 3 * unit, rect.height))
-    pygame.draw.rect(surf, color, ( rect.width - 9*unit, (rect.height - 6*unit)/2, 9 * unit, 6*unit))
+    d = min(rect.width, rect.height)
+    
+    pygame.draw.circle(surf,color, rect.center, 40)
+    pygame.draw.circle(surf, (0,0,0), (d - 5, d), d/2)
+    pygame.draw.circle(surf, (255,0,0), (d,d-1),d/6)
+    
 
 def draw_bullet(surf, color):
     clear(surf, color)
@@ -64,6 +61,4 @@ def draw_player(surf, color):
     dh = rect.height - d
 
     pygame.draw.rect(surf, color, (0, (rect.height - wall)/2, rect.width, wall))
-    
-    
 

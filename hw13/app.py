@@ -11,6 +11,7 @@ class Application(object):
 
     def __init__(self):
         pygame.init()
+        pygame.key.set_repeat(1,1)
         self.screen = pygame.display.set_mode(self.screen_size, self.screen_flags)
         if self.title:
             pygame.display.set_caption(self.title)

@@ -373,7 +373,7 @@ class Game(Application):
         self.xplos.draw(screen)
         self.bullets.draw(screen)
         self.player.draw_image()
-        pygame.draw.circle(screen, self.player.color,(self.player.rect.x,self.player.rect.y),10)
+        pygame.draw.polygon(screen, self.player.color,[(self.player.rect.x,self.player.rect.y),(self.player.rect.x - 15, self.player.rect.y - 15),(self.player.rect.x,self.player.rect.y - 50), (self.player.rect.x +15, self.player.rect.y-15)])
         
 
 if __name__ == "__main__":
