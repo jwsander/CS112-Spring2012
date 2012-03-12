@@ -304,7 +304,6 @@ class Game(Application):
     screen_size = 800, 600
     min_dt = 200
     max_ships = 600
-
     pygame.font.init()
 
 
@@ -315,7 +314,7 @@ class Game(Application):
         self.ships = ShipGroup(self.max_ships)
         self.bullets = ShipGroup(self.max_ships)
         self.xplos = ExplosionGroup()
- #       self.score = 0
+        self.score = 0
         self.player = Player(400, 560, 20, 20, self.bounds, (255,255,255))
         Explosion.group = self.xplos
 
@@ -332,7 +331,7 @@ class Game(Application):
         elif event.type == KEYDOWN and event.key == K_f:
             dt = min(self.min_dt, self.clock.get_time())
             BulletSpawner(500, self.bullets, self.bounds,self.player).update(dt)
-
+        
         elif event.type == KEYDOWN and event.key == K_w:
             self.player.move("w")
         elif event.type == KEYDOWN and event.key == K_s:
@@ -344,7 +343,6 @@ class Game(Application):
 
     def update(self):
         dt = min(self.min_dt, self.clock.get_time())
-
         self.ships.update(dt)
         self.xplos.update(dt)
         self.bullets.update(dt)
@@ -357,19 +355,19 @@ class Game(Application):
                 if pygame.sprite.collide_rect(bullet, ship):
                     ship.kill()
                     Sprite.kill(bullet)
- #                   self.score +=1
+                    self.score +=1
 
 
         for spawner in self.spawners:
             spawner.update(dt)
 
     def draw(self, screen):
-#        smallfont = pygame.font.Font(None,80)
-#        screen.fill((0,0,0))
-#        text = smallfont.render(str(self.score), True,(255,255,255), (0,0,0))
-#        loc = text.get_rect()
-#        loc.center = self.bounds.center
-#        screen.blit(text,loc)
+        smallfont = pygame.font.Font(None,80)
+        screen.fill((0,0,0))
+        text = smallfont.render(str(self.score), True,(255,255,255), (0,0,0))
+        loc = text.get_rect()
+        loc.center = self.bounds.center
+        screen.blit(text,loc)
 
         self.ships.draw(screen)
         self.xplos.draw(screen)
