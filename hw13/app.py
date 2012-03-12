@@ -73,7 +73,10 @@ class Application(object):
             self.update()
             self.draw(self.screen)
             pygame.display.flip()
-
+            
+    def death(done):
+        if done == True:
+            self.quit()
 
     def run(self):
         self.done = False
