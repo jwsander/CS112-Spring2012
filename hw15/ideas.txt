@@ -1,0 +1,49 @@
+Game Ideas
+
+
+##1. Meme Madness
+A survival beat 'em up/shooter in which the player(s) survive waves of enemies, all of which are based on internet memes.
+
+###Genre
+Static screen survival beat'em up. Think Balloon Fight mixed with survival levels from Super Smash Bros, plus bosses.
+
+###Technical Hurdles
+   *importing pics
+   *illusion of character movement
+   *multiple enemy types
+   *multiplayer
+   *weapons/powerups
+   *increasing difficulty levels
+   *spawn rates
+
+
+##2. Socialization
+Make and keep social ties with randomly generated personalities so your social network will survive a random disaster (or, at least, you will.)
+
+###Genre
+Strategy. Should play kind of like a simplified version of the card game Illuminati [http://en.wikipedia.org/wiki/Illuminati_(game)]
+
+###Technical difficulties
+   *character traits
+   *how character traits interact
+   *random generation of characters
+   *drawing a web of contacts
+   *making disaster effects
+   *difficulty levels
+   *multiplayer (?)
+
+
+##3. Killer Skier: Red Snow
+Armed with a trusty pair of uzis and pursued by snowboarding ninjas, you ski down a quadruple black diamond with one goal: survive.
+
+###Genre
+Run-and-gun shooter, like StarFox or Sin and Punishment (http://www.youtube.com/watch?v=AAljDk3FpqY). Mouse controls crosshair, arrows control skier.
+
+###Technical difficulties
+   *multiple enemy types
+   *perspective (graphics should go from small to big as you near them)
+   *collisions (when one hits a graphic)
+   *difficulty levels
+   *variable spawn rates (trees, ninjas)
+   *death animations
+   *jumping

@@ -355,7 +355,7 @@ class YWingSpawner(ShipSpawner):
 
 ## GAME
 class Game(Application):
-    title = "SMUP"
+    title = "Nightmare"
     screen_size = 800, 600
     min_dt = 200
     max_ships = 600

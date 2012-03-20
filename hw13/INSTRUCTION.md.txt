@@ -11,3 +11,5 @@ Controls:
 
 	f = fire
 
+Made by Jon Ackerman and John Sanders
+
