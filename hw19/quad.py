@@ -98,6 +98,10 @@ from pygame.locals import *
 
 from pygame import Rect
 
+points = []
+
+
+
 MAX_DEPTH = 10
 class QuadTreeNode(object):
 
@@ -105,15 +109,13 @@ class QuadTreeNode(object):
         self.rect = rect
         self.data = None
         self.is_split = False
-
+        self.points = points
         self.ne = None
         self.nw = None
         self.se = None
         self.sw = None
-
-        self.depth = depth
-        self.allpoints = []
         self.rects = []
+        self.depth = depth
 
     def add_point(self, point):
         # if we don't have data, just add it
@@ -141,52 +143,48 @@ class QuadTreeNode(object):
 
             # re add the point
             self.add_point(prev_point)
-            self.rects.append(self.nw.rect)
-            self.rects.append(self.ne.rect)
-            self.rects.append(self.sw.rect)
-            self.rects.append(self.se.rect)
 
         # add the point to the split
         if self.nw.rect.collidepoint(point):
             self.nw.add_point(point)
-          #  self.rects.append(self.nw.rect)
         elif self.ne.rect.collidepoint(point):
             self.ne.add_point(point)
-         #   self.rects.append(self.ne.rect)
         elif self.sw.rect.collidepoint(point):
             self.sw.add_point(point)
-         #   self.rects.append(self.sw.rect)
         else:
             self.se.add_point(point)
-        #    self.rects.append(self.se.rect)
-        
-        #add the point to universal list
-        
-        self.allpoints.append(point)
-
 
     def get_points(self):
-        if self.data == None:
-            return []
-        elif not self.is_split:
-            plist = []
-            plist.append(self.data)
-            return plist
+        
+        global points
+        points = []
+        if not self.is_split and self.depth == 0:
+            if self.data != None:
+                self.points.append(self.data)
+        elif self.is_split:
+            QuadTreeNode.get_points(self.ne)
+            QuadTreeNode.get_points(self.nw)
+            QuadTreeNode.get_points(self.se)
+            QuadTreeNode.get_points(self.sw)
+
         else:
-            return self.allpoints
+            if self.data != None:
+                self.points.append(self.data)
+        return self.points
 
 
-    def get_rects(node, rects =None):
+    def get_rects(node, rects=None):
+
         if rects is None:
             rects = []
 
         if not node.is_split and node.depth == 0:
             rects.append(node.rect)
             return rects
-
+        
         else:
             node.rects.append(node.rect)
-        
+
         if node.is_split:
             QuadTreeNode.get_rects(node.ne)
             node.rects.extend(node.ne.rects)
@@ -197,30 +195,6 @@ class QuadTreeNode(object):
             QuadTreeNode.get_rects(node.sw)
             node.rects.extend(node.sw.rects)
             return node.rects
-        
+
         else:
             return node.rects
-
-
-            
-
-qtree = QuadTreeNode(Rect(0, 0, 100, 100))
-# no points
-qtree.get_rects()
-# [<rect(0, 0, 100, 100)>]
-
-# one point
-qtree.add_point((10, 10))
-qtree.get_rects()
-# [<rect(0, 0, 100, 100)>]
-
-# two points in different quadrents
-qtree.add_point((25,25))
-qtree.add_point((75, 75))
-qtree.get_rects()
-#[<rect(0, 0, 100, 100)>, <rect(0, 0, 50, 50)>, <rect(50, 0, 50, 50)>, <rect(0, 50, 50, 50)>, <rect(50, 50, 50, 50)>]
-
- # two points in the same quadrent
-qtree.add_point((40, 40))
-qtree.get_rects()
-
