@@ -8,7 +8,9 @@ import os
 import pygame
 from pygame import Rect, Surface
 from pygame.sprite import Group, spritecollide
+
 from resource import load_image, play_song, load_sfx
+
 from player import Player
 from coin import CoinGroup
 

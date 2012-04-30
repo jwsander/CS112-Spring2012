@@ -38,3 +38,4 @@ class Game(ApplicationState):
 
     def draw(self, screen):
         self.level.draw(screen)
+
